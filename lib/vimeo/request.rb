@@ -45,7 +45,7 @@ module Vimeo
     protected
     # :nodoc:
     def method_expects_body?
-      %i(post put path).include?(@method)
+      %i(post put patch).include?(@method)
     end
 
     private

@@ -1,38 +1,71 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vimeo/version'
+# -*- encoding: utf-8 -*-
+# stub: vimeo 2.0.0 ruby lib
 
-Gem::Specification.new do |spec|
-  spec.name             = "vimeo"
-  spec.version          = Vimeo::VERSION
-  spec.authors          = ["Matt Hooks"]
-  spec.description      = "A full featured Ruby implementation of the Vimeo API."
-  spec.email            = "matthooks@gmail.com"
-  spec.homepage         = "http://github.com/matthooks/vimeo"
-  spec.rdoc_options     = ["--main", "README.rdoc", "--inline-source", "--charset = UTF-8"]
-  spec.rubygems_version = "2.2.0"
-  spec.summary          = spec.description
+Gem::Specification.new do |s|
+  s.name = "vimeo"
+  s.version = "2.0.0"
 
-  spec.files            = `git ls-files -z`.split("\x0")
-  spec.executables      = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files       = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths    = ["lib"]
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
+  s.authors = ["Matt Hooks"]
+  s.date = "2015-07-09"
+  s.description = "A full featured Ruby implementation of the Vimeo API."
+  s.email = "matthooks@gmail.com"
+  s.files = [".gitignore", ".rspec", ".travis.yml", "CHANGELOG.rdoc", "Gemfile", "LICENSE", "README.markdown", "Rakefile", "VERSION.yml", "docs/authentication.md", "docs/upload.md", "docs/usage.md", "lib/vimeo.rb", "lib/vimeo/base.rb", "lib/vimeo/client.rb", "lib/vimeo/collection.rb", "lib/vimeo/endpoints/categories.rb", "lib/vimeo/endpoints/channels.rb", "lib/vimeo/endpoints/groups.rb", "lib/vimeo/endpoints/me.rb", "lib/vimeo/endpoints/tags.rb", "lib/vimeo/endpoints/users.rb", "lib/vimeo/endpoints/videos.rb", "lib/vimeo/entities/category.rb", "lib/vimeo/entities/channel.rb", "lib/vimeo/entities/group.rb", "lib/vimeo/entities/me.rb", "lib/vimeo/entities/ondemand.rb", "lib/vimeo/entities/tag.rb", "lib/vimeo/entities/user.rb", "lib/vimeo/entities/video.rb", "lib/vimeo/error.rb", "lib/vimeo/headers.rb", "lib/vimeo/helpers.rb", "lib/vimeo/request.rb", "lib/vimeo/response.rb", "lib/vimeo/upload.rb", "lib/vimeo/version.rb", "spec/spec_helper.rb", "spec/support/shared_examples.rb", "spec/support/vcr.rb", "spec/vimeo/client_spec.rb", "spec/vimeo/collection_spec.rb", "spec/vimeo/endpoints/categories_spec.rb", "spec/vimeo/endpoints/channels_spec.rb", "spec/vimeo/endpoints/group_spec.rb", "spec/vimeo/endpoints/me_spec.rb", "spec/vimeo/endpoints/tags_spec.rb", "spec/vimeo/entities/category_spec.rb", "spec/vimeo/entities/channel_spec.rb", "spec/vimeo/entities/group_spec.rb", "spec/vimeo/entities/me_spec.rb", "spec/vimeo/entities/user_spec.rb", "spec/vimeo/headers_spec.rb", "spec/vimeo/request_spec.rb", "spec/vimeo/response_spec.rb", "vimeo.gemspec"]
+  s.homepage = "http://github.com/matthooks/vimeo"
+  s.rdoc_options = ["--main", "README.rdoc", "--inline-source", "--charset = UTF-8"]
+  s.rubygems_version = "2.4.6"
+  s.summary = "A full featured Ruby implementation of the Vimeo API."
+  s.test_files = ["spec/spec_helper.rb", "spec/support/shared_examples.rb", "spec/support/vcr.rb", "spec/vimeo/client_spec.rb", "spec/vimeo/collection_spec.rb", "spec/vimeo/endpoints/categories_spec.rb", "spec/vimeo/endpoints/channels_spec.rb", "spec/vimeo/endpoints/group_spec.rb", "spec/vimeo/endpoints/me_spec.rb", "spec/vimeo/endpoints/tags_spec.rb", "spec/vimeo/entities/category_spec.rb", "spec/vimeo/entities/channel_spec.rb", "spec/vimeo/entities/group_spec.rb", "spec/vimeo/entities/me_spec.rb", "spec/vimeo/entities/user_spec.rb", "spec/vimeo/headers_spec.rb", "spec/vimeo/request_spec.rb", "spec/vimeo/response_spec.rb"]
 
-  spec.add_dependency "oauth2", "~> 1.0"
-  spec.add_dependency "faraday", "~> 0.9.0"
-  spec.add_dependency "faraday_middleware", "~> 0.9.1"
-  spec.add_dependency "hashie", "~> 3.3"
-  spec.add_dependency "oauth", "~> 0.4"
-  spec.add_dependency "rdoc", "~> 4.2.0"
+  if s.respond_to? :specification_version then
+    s.specification_version = 4
 
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.1"
-  spec.add_development_dependency "rspec-its", "~> 1.1"
-  spec.add_development_dependency "rspec-mocks", "~> 3.1"
-  spec.add_development_dependency "vcr", "~> 2.9"
-  spec.add_development_dependency "webmock", "~> 1.20"
-  spec.add_development_dependency "byebug"
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<oauth2>, ["~> 1.0"])
+      s.add_runtime_dependency(%q<faraday>, ["~> 0.9.0"])
+      s.add_runtime_dependency(%q<faraday_middleware>, ["~> 0.9.1"])
+      s.add_runtime_dependency(%q<hashie>, ["~> 3.3"])
+      s.add_runtime_dependency(%q<oauth>, ["~> 0.4"])
+      s.add_runtime_dependency(%q<rdoc>, ["~> 4.2.0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.7"])
+      s.add_development_dependency(%q<rake>, ["~> 10.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 3.1"])
+      s.add_development_dependency(%q<rspec-its>, ["~> 1.1"])
+      s.add_development_dependency(%q<rspec-mocks>, ["~> 3.1"])
+      s.add_development_dependency(%q<vcr>, ["~> 2.9"])
+      s.add_development_dependency(%q<webmock>, ["~> 1.20"])
+      s.add_development_dependency(%q<byebug>, [">= 0"])
+    else
+      s.add_dependency(%q<oauth2>, ["~> 1.0"])
+      s.add_dependency(%q<faraday>, ["~> 0.9.0"])
+      s.add_dependency(%q<faraday_middleware>, ["~> 0.9.1"])
+      s.add_dependency(%q<hashie>, ["~> 3.3"])
+      s.add_dependency(%q<oauth>, ["~> 0.4"])
+      s.add_dependency(%q<rdoc>, ["~> 4.2.0"])
+      s.add_dependency(%q<bundler>, ["~> 1.7"])
+      s.add_dependency(%q<rake>, ["~> 10.0"])
+      s.add_dependency(%q<rspec>, ["~> 3.1"])
+      s.add_dependency(%q<rspec-its>, ["~> 1.1"])
+      s.add_dependency(%q<rspec-mocks>, ["~> 3.1"])
+      s.add_dependency(%q<vcr>, ["~> 2.9"])
+      s.add_dependency(%q<webmock>, ["~> 1.20"])
+      s.add_dependency(%q<byebug>, [">= 0"])
+    end
+  else
+    s.add_dependency(%q<oauth2>, ["~> 1.0"])
+    s.add_dependency(%q<faraday>, ["~> 0.9.0"])
+    s.add_dependency(%q<faraday_middleware>, ["~> 0.9.1"])
+    s.add_dependency(%q<hashie>, ["~> 3.3"])
+    s.add_dependency(%q<oauth>, ["~> 0.4"])
+    s.add_dependency(%q<rdoc>, ["~> 4.2.0"])
+    s.add_dependency(%q<bundler>, ["~> 1.7"])
+    s.add_dependency(%q<rake>, ["~> 10.0"])
+    s.add_dependency(%q<rspec>, ["~> 3.1"])
+    s.add_dependency(%q<rspec-its>, ["~> 1.1"])
+    s.add_dependency(%q<rspec-mocks>, ["~> 3.1"])
+    s.add_dependency(%q<vcr>, ["~> 2.9"])
+    s.add_dependency(%q<webmock>, ["~> 1.20"])
+    s.add_dependency(%q<byebug>, [">= 0"])
+  end
 end
-

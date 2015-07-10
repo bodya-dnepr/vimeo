@@ -27,11 +27,13 @@ module Vimeo
     ##
     # naive implementation, i know. I have plans to make this better
     def parse response
-      JSON.parse(response, symbolize_names: true)
+      resp = {}
+      resp = JSON.parse(response, symbolize_names: true) unless [204, 302].include?(@status)
+      return resp
     end
 
     def error_from_response
-      response = JSON.parse(@body, symbolize_names: true)
+      response = parse(@body) || {}
       response[:error] if response.has_key? :error
     end
   end

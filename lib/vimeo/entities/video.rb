@@ -3,6 +3,7 @@ module Vimeo
     ##
     # === Description
     class Video < Vimeo::Base
+      include Vimeo::Helpers
 
       ##
       # Edit video metadata

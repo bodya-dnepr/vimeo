@@ -7,7 +7,7 @@ module Vimeo
     end
 
     def perform_get(path, options = {})
-      perform_request(:get, path, options)
+      perform_request(:get, path, options, nil)
     end
 
     def perform_patch(path, body, options = {})
@@ -19,7 +19,7 @@ module Vimeo
     end
 
     def perform_delete(path, options = {})
-      perform_request(:delete, path, options)
+      perform_request(:delete, path, options, nil)
     end
 
     def perform_post(path, body, options = {})
@@ -42,8 +42,36 @@ module Vimeo
     end
 
     def post_upload file, ticket
-			request = { file_data: file }
-			perform_post(ticket.uri, ticket)
+      file = Faraday::UploadIO.new(file.path, file.content_type)
+      request = { file_data: file }
+
+      uri  = URI(ticket.upload_link_secure)
+      url  = "#{uri.scheme}://#{uri.host}"
+      path = ticket.upload_link_secure[url.length..-1]
+
+      conn = Faraday.new(url) do |f|
+        f.request :multipart
+        f.request :url_encoded
+        f.adapter :net_http
+      end
+
+      resp = conn.post(path, request)
+      raise StandartError.new resp.body unless resp.env.status == 302
+      get_video_id_from_upload resp
+    end
+
+    def get_video_id_from_upload resp
+      uri = URI(resp.env.response_headers['location'])
+      url  = "#{uri.scheme}://#{uri.host}"
+      path = resp.env.response_headers['location'][url.length..-1]
+      conn = Faraday.new(url: url) do |faraday|
+        faraday.request  :url_encoded
+        faraday.adapter  :net_http
+      end
+      response = conn.get path
+
+      query = Rack::Utils.parse_query URI(response.env.response_headers['location']).query
+      query['video_uri'].scan(/\d+/).first
     end
 
     def build_collection_from_response(response, klass, options)

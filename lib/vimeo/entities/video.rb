@@ -5,6 +5,10 @@ module Vimeo
     class Video < Vimeo::Base
       include Vimeo::Helpers
 
+      def preview_picture_url
+        self.pictures.try(:[], :data).try(:first).try(:[],:sizes).try(:second).try(:[], :link)
+      end
+
       ##
       # Edit video metadata
       #

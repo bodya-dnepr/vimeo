@@ -54,8 +54,10 @@ module Vimeo
     protected
 
     def update_collection_to_page page
-      options_without_page = @options.tap { |i| i.delete(:page) }
-      new_collection = perform_get_with_object(page, options_without_page, @klass)
+      uri = URI(page)
+      options = Rack::Utils.parse_nested_query(uri.query)
+      new_collection = perform_get_with_object(uri.path, options, @klass)
+      @options = new_collection.instance_eval{ @options }
       @current_page = new_collection.current_page
       @items = new_collection.items
     end
